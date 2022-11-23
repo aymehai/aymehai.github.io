@@ -14574,6 +14574,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Introduction:">Introduction:<a class="anchor-link" href="#Introduction:">&#182;</a></h1><p>In this project I have collected news articles about Twitter , a social media company that was recently aqquired by billionaire Elon Musk, I plan to run a sentiment analysis on the news articles that I have collected from the The New York Times API. Then with the overall sentiment of the news articles come up with stock price predictions.</p>
+<p>This project gives an overview of using APIs to scrape news articles, clean data and perform exploratory data analysis on the information extracted from the articles. I didn't get to this part, but I planned to use Natural Language Tool kit to run sentiment analysis on news-articles. I would have then used Wordcloud to show frequently occuring words in negative and positive news. Later I would have used a stock API and use the collected and exploratory data analysis and correlate news articles sentiment around stock peaks and lows.</p>
+<p>Note: This project can be run on any other company by changing the company name in Article Search (company= 'Twitter')</p>
 
 </div>
 </div>
@@ -14581,11 +14583,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Tools-used:">Tools used:<a class="anchor-link" href="#Tools-used:">&#182;</a></h1><p><a href="https://docs.python.org/3/library/index.html">https://docs.python.org/3/library/index.html</a></p>
-<p><a href="http://docs.python-requests.org/en/master/">http://docs.python-requests.org/en/master/</a></p>
-<p><a href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a></p>
-<p><a href="https://plot.ly/python/">https://plot.ly/python/</a>,</p>
-<p>I had plans to use <a href="https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html">https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html</a>,
+<h1 id="Tools:">Tools:<a class="anchor-link" href="#Tools:">&#182;</a></h1><p>These python libraries are what I used for this project. Here are the links to the documentation. For this project I am using python 3 Jupyter Notebook. <a href="https://docs.python.org/3/library/index.html">https://docs.python.org/3/library/index.html</a> Python 3 contains most of the packages and modules used <a href="http://docs.python-requests.org/en/master/">http://docs.python-requests.org/en/master/</a> Used pandas <a href="https://pandas.pydata.org/pandas-docs/stable/">https://pandas.pydata.org/pandas-docs/stable/</a> and used plotly <a href="https://plot.ly/python/">https://plot.ly/python/</a>, I had plans to use <a href="https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html">https://amueller.github.io/word_cloud/generated/wordcloud.WordCloud.html</a>,
 but due to time I was not able to implement.</p>
 
 </div>
@@ -14635,7 +14633,10 @@ but due to time I was not able to implement.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Part1:-Scraping-News">Part1: Scraping News<a class="anchor-link" href="#Part1:-Scraping-News">&#182;</a></h1><p>For this project we demonstrate how to use the New York Times Article Search API (<a href="http://developer.nytimes.com/">http://developer.nytimes.com/</a>). This is a free API and with this one can search New York Times articles. In order to use it, you must register on <a href="http://developer.nytimes.com/">http://developer.nytimes.com/</a> for an API key.</p>
+<h1 id="Part1:-Scraping-News">Part1: Scraping News<a class="anchor-link" href="#Part1:-Scraping-News">&#182;</a></h1><p>Most news outlets have created Application Programming Interfaces (APIs) to enable computer applications to request stories and information about them. Most of these APIs are not free or their free versions have limitations like article-search capability for the last month. Some news companies don't even provide article search or filtering using keywords (e.x Reddit) and only provide top-headlines</p>
+<p>For this project, I demonstrated how to use the New York Times Article Search API (<a href="http://developer.nytimes.com/">http://developer.nytimes.com/</a>). With this API anyone can search articles dating back to the 1850s till today. Some of the data that is provided includes abstracts, headlines, and other article metadata.
+In order to use the API a user must first register by going to <a href="http://developer.nytimes.com/">http://developer.nytimes.com/</a> to get an API key. After that then you could do some article searches using the New York Times developer console (<a href="http://developer.nytimes.com/article_search_v2.json">http://developer.nytimes.com/article_search_v2.json</a>). This documentation (<a href="http://developer.nytimes.com/article_search_v2.json#/README">http://developer.nytimes.com/article_search_v2.json#/README</a>) is used for creating a URL for article search and for using filtering options, parameters, and other features available.</p>
+<p>There is some limitation when using the API that I must mention. The New York Times API has a limit of one call per second when retrieving some data. To combat this I added a 1-second delay between calls. The result of the API returns a JSON output. In the results I searched for the company name in the content and headline, to avoid duplication I limited the source to New York Times and sorted by oldest first. I save the JSON data into a pandas data frame and CSV file.</p>
 
 </div>
 </div>
@@ -14786,7 +14787,8 @@ but due to time I was not able to implement.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Part1.1:-Cleaning-the-Data">Part1.1: Cleaning the Data<a class="anchor-link" href="#Part1.1:-Cleaning-the-Data">&#182;</a></h1>
+<h1 id="Part1.1:-Cleaning-the-Data">Part1.1: Cleaning the Data<a class="anchor-link" href="#Part1.1:-Cleaning-the-Data">&#182;</a></h1><p>The company CSV file data is read into the pandas data frame. The columns multimedia, byline, uri, etc are constant and not useful for analysis so as a result they are dropped. The headline is a string-type dictionary and contains the main headline and the news publication date is converted to a pandas DateTime object.</p>
+
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14969,7 +14971,8 @@ but due to time I was not able to implement.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Part-1.2:-EDA-of-News-articles">Part 1.2: EDA of News articles<a class="anchor-link" href="#Part-1.2:-EDA-of-News-articles">&#182;</a></h1><p>Here we are going to be looking for the Top 10 subjects that are in the articles.</p>
+<h1 id="Part-1.2:-EDA-of-News-articles">Part 1.2: EDA of News articles<a class="anchor-link" href="#Part-1.2:-EDA-of-News-articles">&#182;</a></h1><p>The keywords column contains interesting subject entities (e.x organization, people, glocationsitems) and items in the article content. It is provided as a dictionary in string format. Because of this valuable information, I decided to use this information to my advantage. Using the keywords column, I will be looking for the Top 10 subjects that are in the articles.</p>
+<p>Twitter is one of the most popular social media websites online. Even though it has a limited user base people suggest it is one of the most crucial social media applications when it comes to influencing. Twitter is also one of the very few social networks where brands and consumers have clear and concise communication.</p>
 
 </div>
 </div>
@@ -15036,7 +15039,8 @@ but due to time I was not able to implement.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Plotting-the-Data">Plotting the Data<a class="anchor-link" href="#Plotting-the-Data">&#182;</a></h1>
+<h1 id="Plotting-the-Data">Plotting the Data<a class="anchor-link" href="#Plotting-the-Data">&#182;</a></h1><p>The subject frequency is plotted. Figuresize is selected to avoid overlap. As well as the text is rotated on x axis to avoid overlap. This gives all the subjects and counts in a glance.</p>
+
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15047,7 +15051,7 @@ but due to time I was not able to implement.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
@@ -15076,9 +15080,7 @@ but due to time I was not able to implement.</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/tmp/ipykernel_2320/3547691946.py:1: FutureWarning: Passing a negative integer is deprecated in version 1.0 and will not be supported in future version. Instead, use None to not limit the column width.
-  pd.set_option(&#39;display.max_colwidth&#39;, -1)
-/tmp/ipykernel_2320/3547691946.py:5: UserWarning: FixedFormatter should only be used together with FixedLocator
+<pre>/tmp/ipykernel_90/2051661631.py:5: UserWarning: FixedFormatter should only be used together with FixedLocator
   ax.set_xticklabels(counts.keys(), rotation=90)
 </pre>
 </div>
@@ -15120,7 +15122,7 @@ but due to time I was not able to implement.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Number of articles published each month</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Number of articles published each day</span>
 <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;pub_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -15170,6 +15172,14 @@ but due to time I was not able to implement.</p>
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Below I will be plotting the various types of news categories (using news_desk) as a pie chart. The percentage is displayed in the chart.</p>
+
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15229,6 +15239,30 @@ but due to time I was not able to implement.</p>
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Here I listed how many articles have identified twitter as a bussiness. As you can see that roughly 80% articles written in 2022 have identified twitter as a bussiness. Some articles just talk about unrelated topics that don't really have anything to do with twitter.</p>
+
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Part-2-:-News-Sentiment-Analysis">Part 2 : News Sentiment Analysis<a class="anchor-link" href="#Part-2-:-News-Sentiment-Analysis">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Here I would have done the news sentiment analysis, but due to time constraints, I was not able to finish. I would have used the Natural Language Toolkit (NLTK) python package. This could be installed at <a href="http://www.nltk.org/install.html">http://www.nltk.org/install.html</a>. Once installed you would open the Python command line and run nltk.download(). This is used to grab NLTK's databases.</p>
+<p>Once installed I would have used the built-in sentiment analyzer and ranked each news story as a positive, negative, or neutral.</p>
+
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
